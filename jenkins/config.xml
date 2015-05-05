@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.7.1">
+    <actions/>
+    <description>SouJava_Scala_Gatling_Generic_Test</description>
+    <logRotator class="hudson.tasks.LogRotator">
+        <daysToKeep>5</daysToKeep>
+        <numToKeep>-1</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+    </logRotator>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.model.ParametersDefinitionProperty>
+            <parameterDefinitions>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>TARGET</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>http://vertx-simple-json-endpoint.herokuapp.com</string>
+                            <string>http://sheltered-tor-1754.herokuapp.com</string>
+                            <string>http://desolate-harbor-2201.herokuapp.com</string>
+                            <string>http://limitless-basin-5531.herokuapp.com</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>NUM_THREADS</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>1000</string>
+                            <string>5000</string>
+                            <string>10000</string>
+                            <string>20000</string>
+                            <string>40000</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>RAMP_TIME</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>0</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>DURATION</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>60</string>
+                            <string>120</string>
+                            <string>300</string>
+                            <string>600</string>
+                            <string>1000</string>
+                            <string>2000</string>
+                            <string>5000</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>ENDPOINT</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>/hello</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+                <hudson.model.ChoiceParameterDefinition>
+                    <name>ENDPOINT_NAME</name>
+                    <description></description>
+                    <choices class="java.util.Arrays$ArrayList">
+                        <a class="string-array">
+                            <string>AC_API_1_1</string>
+                        </a>
+                    </choices>
+                </hudson.model.ChoiceParameterDefinition>
+            </parameterDefinitions>
+        </hudson.model.ParametersDefinitionProperty>
+    </properties>
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.7">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+            <hudson.plugins.git.UserRemoteConfig>
+                <url>https://github.com/soujava/scala-gatling-bootstrap-mvn.git</url>
+            </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+            <hudson.plugins.git.BranchSpec>
+                <name>*/master</name>
+            </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions/>
+    </scm>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers>
+        <hudson.triggers.TimerTrigger>
+            <spec>H 4 * * 1-7</spec>
+        </hudson.triggers.TimerTrigger>
+    </triggers>
+    <concurrentBuild>false</concurrentBuild>
+    <rootModule>
+        <groupId>io.gatling</groupId>
+        <artifactId>scala-gatling-bootstrap-mvn</artifactId>
+    </rootModule>
+    <goals>gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=${NUM_THREADS} -DRAMP_TIME=${RAMP_TIME} -DDURATION=${DURATION} -DTARGET=${TARGET} -DENDPOINT=${ENDPOINT} -DENDPOINT_NAME=${ENDPOINT_NAME}</goals>
+    <aggregatorStyleBuild>true</aggregatorStyleBuild>
+    <incrementalBuild>false</incrementalBuild>
+    <ignoreUpstremChanges>false</ignoreUpstremChanges>
+    <archivingDisabled>false</archivingDisabled>
+    <siteArchivingDisabled>false</siteArchivingDisabled>
+    <fingerprintingDisabled>false</fingerprintingDisabled>
+    <resolveDependencies>false</resolveDependencies>
+    <processPlugins>false</processPlugins>
+    <mavenValidationLevel>-1</mavenValidationLevel>
+    <runHeadless>false</runHeadless>
+    <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+    <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+    <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+    <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    <reporters/>
+    <publishers>
+        <io.gatling.jenkins.GatlingPublisher plugin="gatling@1.0.4-SNAPSHOT">
+            <enabled>true</enabled>
+        </io.gatling.jenkins.GatlingPublisher>
+    </publishers>
+    <buildWrappers/>
+    <prebuilders/>
+    <postbuilders/>
+    <runPostStepsIfResult>
+        <name>FAILURE</name>
+        <ordinal>2</ordinal>
+        <color>RED</color>
+        <completeBuild>true</completeBuild>
+    </runPostStepsIfResult>
+</maven2-moduleset>
