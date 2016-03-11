@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        targetNamespace="http://schema.soujava.org.br/webservice/wsdl/1.1"
+        xmlns:wns="http://schema.soujava.org.br/webservice/wsdl/1.1"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <schema elementFormDefault="qualified"
+                targetNamespace="http://schema.soujava.org.br/webservice/wsdl/1.1"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <simpleType name="CompletionStatusCode">
+                <restriction base="xsd:string">
+                    <enumeration value="OK"/>
+                    <enumeration value="ERROR"/>
+                </restriction>
+            </simpleType>
+
+            <element name="WebServiceInvocationResult">
+                <complexType>
+                    <sequence>
+                        <element name="code" type="wns:CompletionStatusCode"/>
+                        <element name="message" type="xsd:string"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="xml" type="xsd:string"/>
+        </schema>
+    </wsdl:types>
+
+    <wsdl:message name="postEsbMessageRequest">
+        <wsdl:part name="postEsbMessageRequest" element="wns:xml"/>
+    </wsdl:message>
+
+    <wsdl:message name="postEsbMessageResponse">
+        <wsdl:part name="parameters" element="wns:WebServiceInvocationResult"/>
+    </wsdl:message>
+
+    <wsdl:portType name="esbWebService">
+        <wsdl:operation name="postEsbMessage">
+            <wsdl:input message="wns:postEsbMessageRequest"></wsdl:input>
+            <wsdl:output message="wns:postEsbMessageResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="esbWebServiceSoapBinding" type="wns:esbWebService">
+        <wsdlsoap:binding style="document"
+                          transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="postEsbMessage">
+            <!--
+                the message attribute seems not to be defined in the XSD
+                though according to in the specification
+                 (http://www.w3.org/TR/wsdl) there are references to it.
+             -->
+            <wsdl:input name="postEsbMessageRequest" >
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="postEsbMessageResponse" >
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="esb-web-service">
+        <wsdl:port binding="wns:esbWebServiceSoapBinding" name="esb-port">
+            <wsdlsoap:address location="http://localhost:9080/esbWebServiceEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

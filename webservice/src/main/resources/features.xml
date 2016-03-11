@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name='webservice'>
+    <feature name='webservice' version='1.0'>
+        <bundle>mvn:br.org.soujava/webservice/1.0</bundle>
+        <feature>camel-jms</feature>
+        <feature>camel-velocity</feature>
+        <feature>camel-netty</feature>
+        <feature>cxf</feature>
+        <feature>camel-spring</feature>
+        <feature>camel-jaxb</feature>
+        <feature>camel-cxf</feature>
+    </feature>
+</features>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+           http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="br.org.soujava" />
+
+    <cxf:cxfEndpoint id="esbWebServiceEndpoint"
+                     address="http://localhost:8090/esbWebServiceEndpoint"
+                     wsdlURL="META-INF/wsdl/report_incident.wsdl">
+        <cxf:properties>
+            <entry key="dataFormat" value="MESSAGE"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+
+    <bean id="reportIncidentRoutes" class="br.org.soujava.ReportIncidentRoutes" />
+
+    <!-- ================================== -->
+    <!-- Define camel context               -->
+    <!-- ================================== -->
+    <camel:camelContext id="camel">
+        <camel:routeBuilder ref="reportIncidentRoutes"/>
+    </camel:camelContext>
+</beans>
