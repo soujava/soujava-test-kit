@@ -1,5 +1,6 @@
 package br.org.soujava.webservice;
 
+import br.org.soujava.schema.webservice.wsdl._1.WebServiceInvocationResult;
 import br.org.soujava.schema.webservice.wsdl._1_1.EsbWebService;
 
 import org.apache.camel.test.spring.CamelSpringTestSupport;
@@ -24,7 +25,7 @@ public class WebserviceTest extends CamelSpringTestSupport {
     }
 
     @Test
-    public void testShouldFailWhenMessageIsTooBig() throws Exception {
+    public void testPostAnything() throws Exception {
         String msg =
                 "<Data>" +
                         "  <Node>" +
@@ -47,6 +48,45 @@ public class WebserviceTest extends CamelSpringTestSupport {
 
         assert o != null;
     }
+
+
+    @Test
+    public void testPhase1() throws Exception {
+        final String xml = "phase1";
+
+        // create the webservice client and send the request
+        EsbWebService client = createCXFClient(URL);
+        WebServiceInvocationResult o = client.postEsbMessage(xml);
+        System.out.println(o);
+        assert o != null;
+        assert o.getMessage().contains("phase2");
+    }
+
+    @Test
+    public void testPhase2() throws Exception {
+        final String xml = "phase2";
+
+        // create the webservice client and send the request
+        EsbWebService client = createCXFClient(URL);
+        WebServiceInvocationResult o = client.postEsbMessage(xml);
+        System.out.println(o);
+        assert o != null;
+        assert o.getMessage().contains("phase3");
+    }
+
+    @Test
+    public void testPhase3() throws Exception {
+        final String xml = "phase3";
+
+        // create the webservice client and send the request
+        EsbWebService client = createCXFClient(URL);
+        WebServiceInvocationResult o = client.postEsbMessage(xml);
+        System.out.println(o);
+        assert o != null;
+        assert o.getMessage().contains("Good job");
+    }
+
+
 
     @Override
     protected AbstractApplicationContext createApplicationContext() {

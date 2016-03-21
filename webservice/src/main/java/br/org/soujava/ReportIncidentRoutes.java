@@ -37,7 +37,7 @@ public class ReportIncidentRoutes extends RouteBuilder {
         List<Element> outElements = new ArrayList<Element>();
         outElements.add(doc.getDocumentElement());
         CxfPayload<SoapHeader> responsePayload = new CxfPayload<SoapHeader>(null, outElements);
-//        LOG.info("Done creating CXF payload result...");
+        System.out.println("Done creating CXF payload result...");
         return responsePayload;
     }
 
@@ -62,8 +62,26 @@ public class ReportIncidentRoutes extends RouteBuilder {
             public void process(Exchange exchange) throws Exception {
                 System.out.println("Got to the processor, will send a response back");
                 String str = exchange.getIn().getBody(String.class);
-//                exchange.getOut().setBody(initResult(result));
-                exchange.getOut().setBody("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><WebServiceInvocationResult xmlns=\"http://schema.soujava.org.br/webservice/wsdl/1.1\"><code>OK</code><message>cxvxcv</message></WebServiceInvocationResult></soap:Body></soap:Envelope>\n");
+                System.out.println(str);
+
+                String response;
+
+                if(str != null && str.contains("phase1")){
+                    response = "<code>OK</code><message>phase2</message>";
+                }else if(str != null && str.contains("phase2")){
+                    response = "<code>OK</code><message>phase3</message>";
+                }else if(str != null && str.contains("phase3")){
+                    response = "<code>OK</code><message>Good job, you finished it :)</message>";
+                }else {
+                    response = "<code>OK</code><message>Powered by SouJava Team :)</message>";
+                }
+
+                String result = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body>" +
+                        "<WebServiceInvocationResult xmlns=\"http://schema.soujava.org.br/webservice/wsdl/1.1\">" +
+                            response
+                        + "</WebServiceInvocationResult></soap:Body></soap:Envelope>\n";
+
+                exchange.getOut().setBody(result);
             }
         });
     }
