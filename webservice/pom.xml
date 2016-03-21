@@ -3,7 +3,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.org.soujava</groupId>
+    <parent>
+        <groupId>br.org.soujava</groupId>
+        <artifactId>scala-gatling-bootstrap-mvn</artifactId>
+        <version>2.1.7</version>
+    </parent>
+
     <artifactId>webservice</artifactId>
     <packaging>bundle</packaging>
     <version>1.0</version>

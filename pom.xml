@@ -6,57 +6,19 @@
 	<groupId>br.org.soujava</groupId>
 	<artifactId>scala-gatling-bootstrap-mvn</artifactId>
 	<version>2.1.7</version>
+    <packaging>pom</packaging>
+
+
+    <modules>
+        <module>webservice</module>
+        <module>gatling</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gatling.version>${project.version}</gatling.version>
 		<gatling-plugin.version>2.1.7</gatling-plugin.version>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>io.gatling.highcharts</groupId>
-			<artifactId>gatling-charts-highcharts</artifactId>
-			<version>${gatling.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.timewalker.ffmq</groupId>
-			<artifactId>ffmq3-core</artifactId>
-			<version>3.0.7</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.gatling</groupId>
-			<artifactId>gatling-jms</artifactId>
-			<version>${gatling.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.jms</groupId>
-			<artifactId>jms</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
-			<version>5.8.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-testkit_2.10</artifactId>
-			<version>2.3.8</version>
-			<scope>test</scope>
-		</dependency>
-
-
-	</dependencies>
-
 
     <repositories>
         <repository>
@@ -65,26 +27,4 @@
         </repository>
     </repositories>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>io.gatling</groupId>
-				<artifactId>gatling-maven-plugin</artifactId>
-				<version>2.1.1</version>
-				<executions>
-					<execution>
-						<phase>test</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<dataFolder>src/test/resources/data</dataFolder>
-							<resultsFolder>target/gatling/results</resultsFolder>
-							<simulationsFolder>src/test/scala</simulationsFolder>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
