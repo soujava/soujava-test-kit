@@ -1,4 +1,4 @@
-package com.dtg.esb.api.matchcraft.unit.mock;
+package br.org.soujava.httpmock;
 
 import com.github.kristofa.test.http.MockHttpServer;
 import com.github.kristofa.test.http.SimpleHttpResponseProvider;
@@ -10,12 +10,10 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
-
 /**
- * Abstract class that contains the startup and teardown methods used to create and stop mock services
  * @author thomasmodeneis
  */
-public abstract class MatchcraftBaseMockTest {
+public abstract class BaseMockTest {
 
     protected static final String UTF_8 = "UTF-8";
     protected static MockHttpServer server;

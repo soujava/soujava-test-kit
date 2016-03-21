@@ -1,4 +1,4 @@
-package com.dtg.esb.api.matchcraft.unit.mock;
+package br.org.soujava.httpmock;
 
 import com.github.kristofa.test.http.Method;
 import com.github.kristofa.test.http.MockHttpServer;
@@ -20,13 +20,10 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
-
 /**
- * Example test for MOCK http requests using MatchcraftBaseMockTest
  * @author thomasmodeneis
- *
  */
-public class MockHttpServerTest extends MatchcraftBaseMockTest {
+public class MockHttpServerTest extends BaseMockTest {
 
     @Test
     public void testShouldHandleGetRequests() throws IOException {
