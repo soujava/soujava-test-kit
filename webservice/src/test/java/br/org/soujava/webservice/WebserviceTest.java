@@ -1,3 +1,6 @@
+/**
+ * @author Thomas Modeneis
+ */
 package br.org.soujava.webservice;
 
 import br.org.soujava.schema.webservice.wsdl._1.WebServiceInvocationResult;

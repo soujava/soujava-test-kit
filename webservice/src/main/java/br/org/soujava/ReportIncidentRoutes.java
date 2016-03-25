@@ -1,3 +1,6 @@
+/**
+ * @author Thomas Modeneis
+ */
 package br.org.soujava;
 
 

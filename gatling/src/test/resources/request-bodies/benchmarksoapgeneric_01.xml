@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ns="http://schema.dtg.nl/esb_webservice/wsdl/1.1">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns:xml>
+            <![CDATA[
+                <message>phase1</message>
+            ]]>
+        </ns:xml>
+    </soapenv:Body>
+</soapenv:Envelope>
