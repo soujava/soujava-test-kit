@@ -32,6 +32,10 @@
             <id>repository-jboss-org</id>
             <url>http://repository.jboss.org/maven2</url>
         </repository>
+        <repository>
+            <id>repository-fusesource-org</id>
+            <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+        </repository>
     </repositories>
 
 
