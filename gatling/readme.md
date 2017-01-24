@@ -12,7 +12,18 @@ Requirements
 
 Have installed:
 
-* [Maven 2+](https://maven.apache.org/download.cgi)
+* [Maven =3.0.5](https://maven.apache.org/download.cgi)
+```
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz                           2013-05-24 13:57  4.9M
+[TXT] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.asc                       2013-05-24 13:57  195
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.md5                       2013-05-24 13:57   32
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.sha1                      2013-05-24 13:57   40
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip                              2013-05-24 13:57  5.6M
+[TXT] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.asc                          2013-05-24 13:57  195
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.md5                          2013-05-24 13:57   32
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.sha1                         2013-05-24 13:57   40
+```
+
 * [OpenJDK 7+](http://openjdk.java.net/install/)
 * [Jenkins 1.6+](https://jenkins-ci.org/) *In case you want to configure the CI project.
 

@@ -57,7 +57,19 @@ If you came here because you heard about Velocity somewhere on the web, this is 
 
 ![Maven](https://soujavablog.files.wordpress.com/2015/05/maven.png)
 
-This project build with Maven and the maven-plugin.
+This project should be build with Maven +3.0.5 and the maven-plugin.
+* [Maven =3.0.5](https://maven.apache.org/download.cgi)
+```
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz                           2013-05-24 13:57  4.9M
+[TXT] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.asc                       2013-05-24 13:57  195
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.md5                       2013-05-24 13:57   32
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.tar.gz.sha1                      2013-05-24 13:57   40
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip                              2013-05-24 13:57  5.6M
+[TXT] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.asc                          2013-05-24 13:57  195
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.md5                          2013-05-24 13:57   32
+[   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.sha1                         2013-05-24 13:57   40
+```
+
 
 Some people may say: "Why not use SBT if this is a Scala project, or maybe why not Gradle?"
 
