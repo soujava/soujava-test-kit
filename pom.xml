@@ -25,9 +25,14 @@
 
     <repositories>
         <repository>
+            <id>repository-ops4j-org</id>
+            <url>http://repository.ops4j.org/m2release/</url>
+        </repository>
+        <repository>
             <id>repository-jboss-org</id>
-            <url>http://ams-mvn01:8081/nexus/content/repositories/repository-jboss-org/</url>
+            <url>http://repository.jboss.org/maven2</url>
         </repository>
     </repositories>
+
 
 </project>
