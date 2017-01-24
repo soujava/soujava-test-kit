@@ -50,7 +50,7 @@ The Spring Framework provides a comprehensive programming and configuration mode
 Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers & clients.
 
 
-![Velocity](http://velocity.apache.org/engine/releases/velocity-1.4/images/logo.gif)
+![Velocity](https://velocity.apache.org/engine/1.4/images/logo.gif)
 (Testing packages Under development)
 Velocity is a project of the Apache Software Foundation, Velocity Engine is the actual templating engine which does all the work. 
 If you came here because you heard about Velocity somewhere on the web, this is probably the right place to start.
@@ -69,7 +69,6 @@ This project should be build with Maven +3.0.5 and the maven-plugin.
 [   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.md5                          2013-05-24 13:57   32
 [   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.sha1                         2013-05-24 13:57   40
 ```
-
 
 Some people may say: "Why not use SBT if this is a Scala project, or maybe why not Gradle?"
 
