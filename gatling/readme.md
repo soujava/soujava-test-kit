@@ -311,3 +311,19 @@ Running tests for SOAP XML WSDL Testing
 # Maven command line
 
 `mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkSOAPGeneric -DNUM_THREADS=1 -DRAMP_TIME=100 -DDURATION=10 -DTARGET=http://localhost:809-DENDPOINT=/esbWebServiceEndpoint -DENDPOINT_NAME=ESB_WS -DTEST_FILE="src/test/resources/request-bodies/benchmarksoapgeneric_01.xml" -DSTATUS_CHECK=200 -DREGEX_CHECK="200 OK" -DTARGET1_SWITCH="90.0"`
+
+
+REPORTS
+========
+
+Jenkins introduced a security change that breaks Gatling reports display.
+You sadly have to disable it to get them back, see how-to:
+
+Open Jenkins CFG file:
+`sudo vi /etc/default/jenkins`
+
+Add the following configuration:
+
+```
+JAVA_ARGS="-Djava.awt.headless=true -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; style-src 'unsafe-inline' *;script-src 'unsafe-inline' *;\""  # Allow graphs etc. to work even when an X server is present
+```
