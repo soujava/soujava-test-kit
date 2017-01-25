@@ -149,7 +149,7 @@
             </reportTargets>
         </htmlpublisher.HtmlPublisher>
         <io.gatling.jenkins.GatlingPublisher plugin="gatling@1.2.1">
-            <enabled>false</enabled>
+            <enabled>true</enabled>
         </io.gatling.jenkins.GatlingPublisher>
     </publishers>
     <buildWrappers/>
