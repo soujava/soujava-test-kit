@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset plugin="maven-plugin@2.7.1">
+<maven2-moduleset plugin="maven-plugin@2.14">
     <actions/>
     <description>SouJava_Scala_Gatling_Generic_Test</description>
-    <logRotator class="hudson.tasks.LogRotator">
-        <daysToKeep>5</daysToKeep>
-        <numToKeep>-1</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-    </logRotator>
     <keepDependencies>false</keepDependencies>
     <properties>
+        <jenkins.model.BuildDiscarderProperty>
+            <strategy class="hudson.tasks.LogRotator">
+                <daysToKeep>5</daysToKeep>
+                <numToKeep>-1</numToKeep>
+                <artifactDaysToKeep>-1</artifactDaysToKeep>
+                <artifactNumToKeep>-1</artifactNumToKeep>
+            </strategy>
+        </jenkins.model.BuildDiscarderProperty>
         <hudson.model.ParametersDefinitionProperty>
             <parameterDefinitions>
                 <hudson.model.ChoiceParameterDefinition>
@@ -29,6 +31,9 @@
                     <description></description>
                     <choices class="java.util.Arrays$ArrayList">
                         <a class="string-array">
+                            <string>1</string>
+                            <string>10</string>
+                            <string>100</string>
                             <string>1000</string>
                             <string>5000</string>
                             <string>10000</string>
@@ -82,7 +87,7 @@
             </parameterDefinitions>
         </hudson.model.ParametersDefinitionProperty>
     </properties>
-    <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.7">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@3.0.1">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
             <hudson.plugins.git.UserRemoteConfig>
@@ -102,6 +107,7 @@
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
     <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <jdk>JDK8u121</jdk>
     <triggers>
         <hudson.triggers.TimerTrigger>
             <spec>H 4 * * 1-7</spec>
@@ -109,18 +115,19 @@
     </triggers>
     <concurrentBuild>false</concurrentBuild>
     <rootModule>
-        <groupId>io.gatling</groupId>
+        <groupId>br.org.soujava</groupId>
         <artifactId>scala-gatling-bootstrap-mvn</artifactId>
     </rootModule>
-    <goals>gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=${NUM_THREADS} -DRAMP_TIME=${RAMP_TIME} -DDURATION=${DURATION} -DTARGET=${TARGET} -DENDPOINT=${ENDPOINT} -DENDPOINT_NAME=${ENDPOINT_NAME}</goals>
+    <goals>clean install</goals>
     <aggregatorStyleBuild>true</aggregatorStyleBuild>
     <incrementalBuild>false</incrementalBuild>
-    <ignoreUpstremChanges>false</ignoreUpstremChanges>
+    <ignoreUpstremChanges>true</ignoreUpstremChanges>
+    <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
     <archivingDisabled>false</archivingDisabled>
     <siteArchivingDisabled>false</siteArchivingDisabled>
     <fingerprintingDisabled>false</fingerprintingDisabled>
-    <resolveDependencies>false</resolveDependencies>
-    <processPlugins>false</processPlugins>
+    <resolveDependencies>true</resolveDependencies>
+    <processPlugins>true</processPlugins>
     <mavenValidationLevel>-1</mavenValidationLevel>
     <runHeadless>false</runHeadless>
     <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
@@ -129,17 +136,36 @@
     <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     <reporters/>
     <publishers>
-        <io.gatling.jenkins.GatlingPublisher plugin="gatling@1.0.4-SNAPSHOT">
-            <enabled>true</enabled>
+        <htmlpublisher.HtmlPublisher plugin="htmlpublisher@1.12">
+            <reportTargets>
+                <htmlpublisher.HtmlPublisherTarget>
+                    <reportName>HTML Report</reportName>
+                    <reportDir>gatling/target/result</reportDir>
+                    <reportFiles>index.html</reportFiles>
+                    <alwaysLinkToLastBuild>true</alwaysLinkToLastBuild>
+                    <keepAll>true</keepAll>
+                    <allowMissing>false</allowMissing>
+                </htmlpublisher.HtmlPublisherTarget>
+            </reportTargets>
+        </htmlpublisher.HtmlPublisher>
+        <io.gatling.jenkins.GatlingPublisher plugin="gatling@1.2.1">
+            <enabled>false</enabled>
         </io.gatling.jenkins.GatlingPublisher>
     </publishers>
     <buildWrappers/>
     <prebuilders/>
-    <postbuilders/>
+    <postbuilders>
+        <hudson.tasks.Shell>
+            <command>cd gatling;
+                mvn clean;
+                mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=${NUM_THREADS} -DRAMP_TIME=${RAMP_TIME} -DDURATION=&quot;${DURATION}&quot; -DTARGET=&quot;${TARGET}&quot; -DENDPOINT=&quot;${ENDPOINT}&quot; -DENDPOINT_NAME=${ENDPOINT_NAME};
+                cp -R target/gatling/*/ target/result;</command>
+        </hudson.tasks.Shell>
+    </postbuilders>
     <runPostStepsIfResult>
-        <name>FAILURE</name>
-        <ordinal>2</ordinal>
-        <color>RED</color>
+        <name>UNSTABLE</name>
+        <ordinal>1</ordinal>
+        <color>YELLOW</color>
         <completeBuild>true</completeBuild>
     </runPostStepsIfResult>
 </maven2-moduleset>
