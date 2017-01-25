@@ -7,7 +7,7 @@ Gatling is the perfect tool for SDETs that are performing on a performance/load 
 Gatling integrates Jenkins and this is great because you run your performance tests daily as you develop your app.
 
 
-Requirements
+Requirements for Gatling 2.2.3
 ============
 
 Have installed:
@@ -24,7 +24,7 @@ Have installed:
 [   ] https://archive.apache.org/dist/maven/binaries/apache-maven-3.0.5-bin.zip.sha1                         2013-05-24 13:57   40
 ```
 
-* [OpenJDK 7+](http://openjdk.java.net/install/)
+* [OpenJDK 8+](http://openjdk.java.net/install/)
 * [Jenkins 1.6+](https://jenkins-ci.org/) *In case you want to configure the CI project.
 
 
@@ -338,3 +338,34 @@ Add the following configuration:
 ```
 JAVA_ARGS="-Djava.awt.headless=true -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; style-src 'unsafe-inline' *;script-src 'unsafe-inline' *;\""  # Allow graphs etc. to work even when an X server is present
 ```
+
+
+Gatling 2.1.7 - JAVA 7 - JDK 7
+===============================
+
+This section is for people interested in having Gatling 2.1.7 with Java JDK 7.
+Because Gatling latest changed the minimum requirement from JDK 7 to JDK 8, many users may ask, does this still works with JDK 7 ? Answer is Yes, sure.
+In order to have it running with JDK 7 is simple, open the pom.xml and uncomment lines below text `<!-- GATLING VERSION - JDK 7 -->`
+
+Complete snippet:
+```
+		<gatling.version>2.1.7</gatling.version>
+		<gatling-maven-plugin.version>2.1.1</gatling-maven-plugin.version>
+		<akka-testkit_2.10.version>2.3.8</akka-testkit_2.10.version>
+```
+
+Then just run mvn install and ignore the failure if is related to, as this just means the default goal execute could not run without arguments.
+
+```
+[ERROR] More than 1 simulation to run, need to specify one, or enable runMultipleSimulations
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2:34.884s
+[INFO] Finished at: Wed Jan 25 10:47:27 CET 2017
+[INFO] Final Memory: 13M/284M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal io.gatling:gatling-maven-plugin:2.2.1:execute (default) on project gatling: Gatling failed. More than 1 simulation to run, need to specify one, or enable runMultipleSimulations -> [Help 1]
+```
+
+Don't worry, this is not a actual error with the cfg. This is just due to the fact that no tests have been selected to run, to execute the example test just run: `mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=100 -DRAMP_TIME=100 -DDURATION=60 -DTARGET=http://vertx-simple-json-endpoint.herokuapp.com -DENDPOINT=/hello -DENDPOINT_NAME=HELLO_WORLD_VERTEX`

@@ -6,7 +6,7 @@
     <parent>
         <groupId>br.org.soujava</groupId>
         <artifactId>scala-gatling-bootstrap-mvn</artifactId>
-        <version>2.1.7</version>
+        <version>2.2.3</version>
     </parent>
 
     <artifactId>webservice</artifactId>
