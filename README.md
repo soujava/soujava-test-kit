@@ -88,6 +88,37 @@ and can execute Apache Ant and Apache Maven based projects as well as arbitrary 
 
 The primary developer of Jenkins is Kohsuke Kawaguchi. Released under the MIT License, [Jenkins Wiki](https://wiki.jenkins-ci.org/display/JENKINS/Home) is free software.
 
+## Installing Jenkins on Ubuntu
+![Jenkins](https://wiki.jenkins-ci.org/download/attachments/327683/JENKINS?version=1&modificationDate=1302750804000)
+
+`sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'`
+`sudo apt-get update`
+`sudo apt-get install jenkins`
+
+## Installing Jenkins in other distros:
+[Installing Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins)
+
+## Configure Jenkins to run with alternative port
+
+* Edit Jenkins startup script to check for a alternative 8085 port:
+* Edit the contents of the function `do_start()`:
+`sudo vi /etc/init.d/jenkins`
+
+* From:
+`check_tcp_port "http" "$HTTP_PORT" "8080" "$HTTP_HOST" "0.0.0.0" || return 2`
+
+* To: 
+`check_tcp_port "http" "$HTTP_PORT" "8085" "$HTTP_HOST" "0.0.0.0" || return 2`
+
+* Edit Jenkins default config to bind to the new alternative 8085 port:
+`sudo vi /etc/default/jenkins`
+
+* From: 
+`HTTP_PORT=8080`
+
+* To: 
+`HTTP_PORT=8085`
+
 
 ## Author
 Thomas Modeneis
