@@ -91,14 +91,14 @@ The primary developer of Jenkins is Kohsuke Kawaguchi. Released under the MIT Li
 ## Installing Jenkins on Ubuntu
 ![Jenkins](https://wiki.jenkins-ci.org/download/attachments/327683/JENKINS?version=1&modificationDate=1302750804000)
 
-`sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'`
-`sudo apt-get update`
-`sudo apt-get install jenkins`
+* `sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'`
+* `sudo apt-get update`
+* `sudo apt-get install jenkins`
 
 ## Installing Jenkins in other distros:
 [Installing Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins)
 
-## Configure Jenkins to run with alternative port
+## Configure Jenkins on Linux to run with alternative port
 
 * Edit Jenkins startup script to check for a alternative 8085 port:
 * Edit the contents of the function `do_start()`:
@@ -119,6 +119,25 @@ The primary developer of Jenkins is Kohsuke Kawaguchi. Released under the MIT Li
 * To: 
 `HTTP_PORT=8085`
 
+# Create jenkins user on Linux (if none was created by the instalation)
+```
+/usr/sbin/groupadd -g 30119 jenkins
+/usr/sbin/useradd -u 30119 -g jenkins jenkins
+ 
+mkdir /home/jenkins
+chown -R jenkins:jenkins /home/jenkins
+```
+
+# Switch to jenkins user on Linux
+`sudo su - jenkins`
+
+# Configure iptables to forward port 80 to 8085
+* Requests from outside
+`iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8085`
+* Requests from localhost
+`iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 8080`
+
+* Now reboot or run `sudo /etc/rc.local` to enable port forwarding. 
 
 ## Author
 Thomas Modeneis
