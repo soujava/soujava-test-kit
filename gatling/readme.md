@@ -49,13 +49,14 @@ export PATH=$M2:$PATH
 
 Install OpenJDK
 ```
-$ sudo apt-get install openjdk-7-jdk
+$ sudo apt-get install openjdk-8-jdk
 ```
 
 Initial Startup (With Jenkins)
 ---------------
 * [Install Maven via Jenkins](https://www.safaribooksonline.com/library/view/jenkins-the-definitive/9781449311155/ch04s06.html)
 * [Install Java via Jenkins](https://www.safaribooksonline.com/library/view/jenkins-the-definitive/9781449311155/ch04s05.html)
+* Make sure to configure jenkins wiith to download and install Oracle JDK 8 build 121, and name it as: JDK8u121
 * [Install Jenkins Gatling Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Gatling+Plugin)
 * ![Gatling Plugin](https://wiki.jenkins-ci.org/download/attachments/65669112/dashboard.png)
 
@@ -77,14 +78,38 @@ Running Tests for REST APIS
 
 With Jenkins
 ---------------
+
+# Configure
+* Add the generic test to the jenkins jobs folder:
 ```
 sudo mkdir /var/lib/jenkins/jobs/SouJava_Scala_Gatling_Generic_Test
-
 sudo cp jenkins/config.xml /var/lib/jenkins/jobs/SouJava_Scala_Gatling_Generic_Test/
 ```
-[Reload jenkins configurations from disk](https://www.safaribooksonline.com/library/view/jenkins-the-definitive/9781449311155/ch04s02.html)
+
+* Configure the permissions for jenkins user to be able to see it:
+`sudo chown -R jenkins:jenkins /var/lib/jenkins/jobs/SouJava_Scala_Gatling_Generic_Test/`
+
+* Check its all correct
+`$ ls -l
+ total 8
+ -rw-r--r-- 1 jenkins jenkins 8013 mrt 23 13:07 config.xml`
+
+* Restart jenkins 
+`sudo service jenkins restart`
+
+OR Reload jenkins configurations from disk.
+
+Steps: Click Manage Jenkins and then on icon: 
+* `Reload Configuration from Disk`
+* `Discard all the loaded data in memory and reload everything from file system. Useful when you modified config files directly on disk.`
 
 Open the job and run o/
+
+
+## I just Forgot my jenkins user password :( 
+Change to root user: `sudo su -`
+Copy the password: `xclip -sel clip < /var/lib/jenkins/secrets/initialAdminPassword`
+Login with admin user and press `ctrl + v` on password input box.
 
 Without Jenkins
 ---------------
@@ -116,138 +141,7 @@ Simulation soujava.BenchmarkGeneric started...
 
 ================================================================================
 
-
-================================================================================
-2015-05-05 19:24:43                                           5s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[----                                                                      ]  0%
-          waiting: 95     / active: 5      / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=0      KO=0     )
-
-================================================================================
-
-
-================================================================================
-2015-05-05 19:24:48                                          10s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[--------                                                                  ]  0%
-          waiting: 90     / active: 10     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=62     KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=62     KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:24:53                                          15s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[------------                                                              ]  0%
-          waiting: 84     / active: 16     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=476    KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=476    KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:24:58                                          20s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[----------------                                                          ]  0%
-          waiting: 79     / active: 21     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=1064   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=1064   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:03                                          25s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[-------------------                                                       ]  0%
-          waiting: 75     / active: 25     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=1805   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=1805   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:08                                          30s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[-----------------------                                                   ]  0%
-          waiting: 69     / active: 31     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=2721   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=2721   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:13                                          35s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[---------------------------                                               ]  0%
-          waiting: 64     / active: 36     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=3807   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=3807   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:18                                          40s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[------------------------------                                            ]  0%
-          waiting: 60     / active: 40     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=5061   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=5061   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:23                                          45s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[----------------------------------                                        ]  0%
-          waiting: 55     / active: 45     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=6458   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=6458   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:28                                          50s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[--------------------------------------                                    ]  0%
-          waiting: 49     / active: 51     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=8041   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=8041   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:33                                          55s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[------------------------------------------                                ]  0%
-          waiting: 44     / active: 56     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=9766   KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=9766   KO=0     )
-================================================================================
-
-
-================================================================================
-2015-05-05 19:25:38                                          60s elapsed
----- HELLO_WORLD_VERTEX --------------------------------------------------------
-[---------------------------------------------                             ]  0%
-          waiting: 40     / active: 60     / done:0
----- Requests ------------------------------------------------------------------
-> Global                                                   (OK=11633  KO=0     )
-> HELLO_WORLD_VERTEX                                       (OK=11633  KO=0     )
-================================================================================
-
+(...)
 
 ================================================================================
 2015-05-05 19:25:38                                          60s elapsed
@@ -300,8 +194,6 @@ Please open the following file: /opt/scala/scala-gatling-bootstrap-mvn/target/ga
 [INFO] Finished at: Tue May 05 19:25:41 CEST 2015
 [INFO] Final Memory: 8M/240M
 [INFO] ------------------------------------------------------------------------
-
-
 ```
 
 
@@ -327,7 +219,10 @@ Running tests for SOAP XML WSDL Testing
 REPORTS
 ========
 
-Jenkins introduced a security change that breaks Gatling reports display.
+If you haven't read this section yet, chances are that you are not being able open the generate the HTML report, 
+don't you worry, we got you covered.
+
+Explanation: Jenkins introduced a security change that breaks Gatling reports display.
 You sadly have to disable it to get them back, see how-to:
 
 Open Jenkins CFG file:
@@ -335,10 +230,19 @@ Open Jenkins CFG file:
 
 Add the following configuration:
 
+Before:
 ```
-JAVA_ARGS="-Djava.awt.headless=true -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; style-src 'unsafe-inline' *;script-src 'unsafe-inline' *;\""  # Allow graphs etc. to work even when an X server is present
+# arguments to pass to java
+JAVA_ARGS="-Djava.awt.headless=true"
 ```
 
+After:
+```
+JAVA_ARGS="-Djava.awt.headless=true -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; style-src 'unsafe-inline' *;script-src 'unsafe-inline' *;\""
+```
+
+Then restart jenkins in order to have the configurations enabled:
+`sudo service jenkins restart`
 
 Gatling 2.1.7 - JAVA 7 - JDK 7
 ===============================
