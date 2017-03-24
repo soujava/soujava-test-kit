@@ -123,7 +123,7 @@ mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THR
 outputs
 ```
 
-$ mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=100 -DRAMP_TIME=100 -DDURATION=60 -DTARGET=http://vertx-simple-json-endpoint.herokuapp.com -DENDPOINT=/hello -DENDPOINT_NAME=HELLO_WORLD_VERTEX
+mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=100 -DRAMP_TIME=100 -DDURATION=60 -DTARGET=http://vertx-simple-json-endpoint.herokuapp.com -DENDPOINT=/hello -DENDPOINT_NAME=HELLO_WORLD_VERTEX
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
@@ -196,16 +196,24 @@ Please open the following file: /opt/scala/scala-gatling-bootstrap-mvn/target/ga
 [INFO] ------------------------------------------------------------------------
 ```
 
+Running generic benchmark feed race_for_speed.csv:
+Java Vertex VS Scala VS Nodejs VS Golang
+```
+mvn gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGenericFeed -DNUM_THREADS=1 -DRAMP_TIME=1 -DDURATION=60 -DTARGET=race_for_speed.csv -DENDPOINT_NAME=vertexVSscalaVSnodejsVSgolang
+```
+
 
 Running Tests for Websocket
 ============
 TODO: Work in progress
-
+[#20](https://github.com/soujava/soujava-test-kit/issues/20)
 
 
 Running Tests for JMS
 ============
 TODO: Work in progress
+[#19](https://github.com/soujava/soujava-test-kit/issues/19)
+
 
 
 
