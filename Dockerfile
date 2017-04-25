@@ -30,6 +30,7 @@ RUN mvn clean install
 WORKDIR /opt/soujava-test-kit/gatling
 RUN mvn clean gatling:execute -Dgatling.simulationClass=soujava.BenchmarkGeneric -DNUM_THREADS=1 -DRAMP_TIME=1 -DDURATION=10 -DTARGET=http://vertx-simple-json-endpoint.herokuapp.com -DENDPOINT=/hello -DENDPOINT_NAME=HELLO_WORLD_VERTEX
 
+VOLUME ["/opt/soujava-test-kit/gatling/target/gatling"]
 
 ENTRYPOINT ["/opt/soujava-test-kit/gatling"]
 CMD ["mvn"]
